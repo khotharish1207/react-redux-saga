@@ -1,68 +1,94 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Redux Saga Boilerplate
 
-## Available Scripts
+The Create-react-app is used to get initial structure. It will adapt all CRA related things.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+* React.js - React 16, React Router 5
+* Redux.js - Redux, Redux-saga, Redux-actions
+* React-intl - multi language support 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Quick Start
 
-### `npm test`
+1. Clone this repo using `git clone https://gitlab.sas.com/Harish.Khot/react-redux-saga.git`
+2. Install dependencies `npm install`
+3. Start server `npm start`
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- ## Project Structure -->
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Getting started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Adding new route
 
-### `npm run eject`
+In the root of project we have `src/routes.js`. You need to add an object with keys `path` and `component` to routes array.
+Here is an example
+```
+[
+    ...
+    {
+        path: '/url' // its require string. It is the view component's url
+        component: App // Its requires component which will be served against url given in path
+    }
+]
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Adding new action
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In directory `src/redux/actions`, you can define your action type constants and action creators. Here we are using Redux-actions creactors.
+For example
+```
+import { createAction } from "redux-actions";
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+export const ACTION_TYPE = "ACTION_TYPE";
+export const actionCreator = createAction(ACTION_TYPE)
+```
+You can import these actions in your components like
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+import { ACTION_TYPE, actionCreator }  from "redux/actions/actions"
+```
+ 
 
-## Learn More
+### Adding new reducer
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can add your reducer in `src/redux/reducers` directory.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Its convention to use 'Reducer' in ending in file name.
+Sample reducer is added in directory `src/redux/reducers/sampleReducer.js`  
 
-### Code Splitting
+It's important to include your newly created reducer in `rootReducer`.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
+### Adding new saga
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+You can add your reducer in `src/redux/sags` directory.
 
-### Making a Progressive Web App
+Its convention to use 'Saga' in ending in file name.
+Sample reducer is added in directory `src/redux/sagas/sampleSaga.js`  
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+It's important to include your newly created reducer in `rootSaga`.
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Adding multilanguages
 
-### Deployment
+This project uses [react-intl](https://www.npmjs.com/package/react-intl)  for multi language support.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Currently it has `en` and `fr` supported keys added (Only for sample). 
+You can add your language spefic keys by adding file with your choosen language in `src/messagebundle` directory. It's necessary to have same key in all language against which you are adding text in other language. Again don't forget to include your language key file in `src/messagebundle/index.js`. 
+It is recommneded to use language code as your file name.
 
-### `npm run build` fails to minify
+Example: If you have key `greet` in file. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+import { FormattedMessage } from "react-intl";
+
+<FormattedMessage id="greet" defaultMessage={`Welcome`} />
+
+```
+
+For more documentation you can take look at https://github.com/formatjs/react-intl/blob/master/docs/Getting-Started.md#the-react-intl-module
+
