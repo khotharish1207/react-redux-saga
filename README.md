@@ -11,7 +11,7 @@ The Create-react-app is used to get initial structure. It will adapt all CRA rel
 
 ## Quick Start
 
-1. Clone this repo using `git clone https://gitlab.sas.com/Harish.Khot/react-redux-saga.git`
+1. Clone this repo using `git clone https://github.com/khotharish1207/react-redux-saga.git`
 2. Install dependencies `npm install`
 3. Start server `npm start`
 4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
