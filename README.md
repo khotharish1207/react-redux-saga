@@ -1,6 +1,7 @@
 # React Redux Saga Boilerplate
 
 The Create-react-app is used to get initial structure. It will adapt all CRA related things.
+demo: https://react-redux-saga-hk.herokuapp.com/
 
 ## Features
 
